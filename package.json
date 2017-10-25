@@ -1,8 +1,8 @@
 {
-  "name": "babel-plugin-jsx-two-way-binding",
+  "name": "babel-plugin-jsx-for-directive",
   "version": "1.0.0",
   "main": "index.js",
-  "keywords": ["JSX", "React", "two-way", "data-binding"],
+  "keywords": ["JSX", "React", "directive", "for"],
   "author": "HuQingyang <i@do.codes>",
   "license": "MIT"
 }
