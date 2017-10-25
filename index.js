@@ -1,5 +1,5 @@
 
-import { objValueStr2AST } from './lib';
+const { objValueStr2AST } = require('./lib');
 
 
 module.exports = function ({types: t}) {
