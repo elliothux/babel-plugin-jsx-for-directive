@@ -71,7 +71,7 @@ class App extends React.Component {
 }
 ```
 
-## 5. Usage with custom attribute name
+## 4. Usage with custom attribute name
 Edit your __.babelrc__ file:
 ```json
 {
