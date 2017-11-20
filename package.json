@@ -1,8 +1,13 @@
 {
   "name": "babel-plugin-jsx-for-directive",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "keywords": ["JSX", "React", "directive", "for"],
   "author": "HuQingyang <i@do.codes>",
-  "license": "MIT"
+  "license": "MIT",
+  "homepage": "https://github.com/HuQingyang/babel-plugin-jsx-for-directive",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HuQingyang/babel-plugin-jsx-for-directive"
+  }
 }
