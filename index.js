@@ -12,9 +12,13 @@ module.exports = function ({types: t}) {
 
         const forBinding = getAndRemoveForBinding(path.node.openingElement);
         if (forBinding) {
-            let [params, array] = forBinding.value.expression.value.split(' in ').map(v => v.trim());
+            let [params, array] = (
+                forBinding.value.expression ?
+                    forBinding.value.expression.value :
+                    forBinding.value.value
+            ).split(' in ').map(v => v.trim());
             params = /\(.+\)/.test(params) ?
-                params.replace(/(\(|\))/g, '').split('.').map(v => v.trim()).map(p => t.identifier(p)) :
+                params.replace(/(\(|\))/g, '').split(',').map(v => v.trim()).map(p => t.identifier(p)) :
                 [t.identifier(params)];
             array = t.callExpression(
                 t.memberExpression(t.identifier('Array'), t.identifier('from')),
