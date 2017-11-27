@@ -39,7 +39,7 @@ class App extends React.Component {
     render() { return (
         <div>
             <ul>
-                <li for={"lan in this.state.languages"}>{lan}</li>
+                <li for={lan in this.state.languages}>{lan}</li>
             </ul>
         </div>
     )}
@@ -62,7 +62,7 @@ class App extends React.Component {
         <div>
             <ul>
                 <li
-                    for={"(lan, index) in this.state.languages"}
+                    for={(lan, index) in this.state.languages}
                     key={index}
                 >{lan}</li>
             </ul>
@@ -97,7 +97,7 @@ class App extends React.Component {
     render() { return (
         <div>
             <ul>
-                <li r-for={"lan in this.state.languages"}>{lan}</li>
+                <li r-for={lan in this.state.languages}>{lan}</li>
             </ul>
         </div>
     )}
