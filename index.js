@@ -6,6 +6,8 @@ module.exports = function ({types: t}) {
     let attrName = 'for';
 
     function JSXElementVisitor(path) {
+        path.traverse({JSXElement: JSXElementVisitor});
+
         const element = path.node.openingElement;
         const forBinding = getAndRemoveForBinding(element);
         if (!forBinding) return;
@@ -21,15 +23,17 @@ module.exports = function ({types: t}) {
                 [array]
         );
 
-        const newNode = t.callExpression(
-            t.memberExpression(array, t.identifier('map')),
-            [t.callExpression(
-                t.memberExpression(
-                    t.arrowFunctionExpression(params, path.node),
-                    t.identifier('bind')
-                ),
-                [t.thisExpression()]
-            )]
+        const newNode = t.jSXExpressionContainer(
+            t.callExpression(
+                t.memberExpression(array, t.identifier('map')),
+                [t.callExpression(
+                    t.memberExpression(
+                        t.arrowFunctionExpression(params, path.node),
+                        t.identifier('bind')
+                    ),
+                    [t.thisExpression()]
+                )]
+            )
         );
 
         path.replaceWith(newNode);
@@ -61,12 +65,12 @@ module.exports = function ({types: t}) {
                 [params, array] = forBinding.split(' in ').map(v => v.trim());
                 params = params.replace(/(\(|\))/g, '').split(',').map(v => v.trim())
             } else if (typeof forBinding === 'object') {
-                let { left, operator, right } = forBinding;
+                let {left, operator, right} = forBinding;
                 if (operator !== 'in') throw new Error(`Operator ${operator} not allowed here, using "in" instead!`);
                 if (left.type === 'Identifier')
                     params = [left.name];
                 else if (left.type === 'SequenceExpression')
-                    params = left.expressions.map(i=> i.name);
+                    params = left.expressions.map(i => i.name);
 
                 if (right.type === 'Identifier')
                     array = right.name;
